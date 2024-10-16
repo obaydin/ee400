@@ -1,0 +1,25 @@
+snrvals = [1 3 5 7 9 11 13 15 17 20];
+pixvals = [1,2,1,2,5,5,5;5,5,10,10,5,7,9];
+n = 0;
+
+while n < 20
+
+    n = n +1
+    for snr = snrvals
+        for pix = pixvals
+            midfreq = randi([400 6000]);
+            sigfreq = 2*randi([50 400]);
+            [P,p,freqs] = spec_data_generator(6400,1000,snr,midfreq,sigfreq,pix(1),pix(2));
+    
+            frequencies = freqs;
+            saveP = append(['C:\Users\STAJYER\Desktop\generated_data\','snr_',int2str(snr),'\','pixs_',num2str(pix(1)),'_',num2str(pix(2)),'\','specs']);
+            %mkdir(saveP)
+            save(append([saveP,'\snr_',int2str(snr),'pixes',num2str(pix(1)),'_',num2str(pix(2)),'_v',num2str(n),'.mat']),"P")
+            savep = append(['C:\Users\STAJYER\Desktop\generated_data\','snr_',int2str(snr),'\','pixs_',num2str(pix(1)),'_',num2str(pix(2)),'\','binary']);
+            %mkdir(savep)
+            save(append([savep,'\snr_',int2str(snr),'pixes',num2str(pix(1)),'_',num2str(pix(2)),'_v',num2str(n),'bnr.mat']),'p')
+        end
+    end
+    
+end
+ 
